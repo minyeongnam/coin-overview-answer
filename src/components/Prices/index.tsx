@@ -1,23 +1,32 @@
 import { PricesData } from 'api/interface/prices';
-import { useApi } from 'api/url/prices';
+import { getPricesApi } from 'api/url';
+import { useEffect, useState } from 'react';
 
 function Prices() {
-  const { data, isLoading } = useApi();
+  const [loading, setLoading] = useState(true);
+  const [data, setData] = useState<PricesData[]>([]);
+
+  const getPrices = async () => {
+    setData(await getPricesApi());
+    setLoading(false);
+  };
+
+  useEffect(() => {
+    getPrices();
+  }, []);
 
   return (
     <div className='page-Prices'>
-      {isLoading ? (
-        'loading'
-      ) : (
-        <ul>
-          {data
-            ?.filter((priceData: PricesData) => priceData.rank < 30)
-            .map((priceData: PricesData) => {
-              const { id, name, symbol } = priceData;
-              return <li key={id}>{`${name} / ${symbol}: ${'가격'}`}</li>;
-            })}
-        </ul>
-      )}
+      <ul>
+        {loading
+          ? 'Loading'
+          : data
+              .filter((priceData) => priceData.rank < 30)
+              .map((priceData) => {
+                const { id, name, symbol } = priceData;
+                return <li key={id}>{`${name} / ${symbol}: ${'가격'}`}</li>;
+              })}
+      </ul>
     </div>
   );
 }

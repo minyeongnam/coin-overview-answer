@@ -6,3 +6,8 @@ export const ROOT = {
   COINS: 'coins',
   NOTFOUND: '/*',
 };
+
+export const COINS = {
+  ROOT: `${ROOT.COINS}`,
+  VIEW: `${ROOT.COINS}/:coinId`,
+};

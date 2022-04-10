@@ -1,14 +1,19 @@
-import { PricesData } from 'api/interface/prices';
+import { PricesList } from 'interface/prices';
 import { getPricesApi } from 'api/url';
 import { useEffect, useState } from 'react';
 
 function Prices() {
   const [loading, setLoading] = useState(true);
-  const [data, setData] = useState<PricesData[]>([]);
+  const [data, setData] = useState<PricesList[]>([]);
 
   const getPrices = async () => {
-    setData(await getPricesApi());
-    setLoading(false);
+    try {
+      setData(await getPricesApi());
+    } catch (e) {
+      console.log(e);
+    } finally {
+      setLoading(false);
+    }
   };
 
   useEffect(() => {

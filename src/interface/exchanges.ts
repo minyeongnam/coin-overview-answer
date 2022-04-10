@@ -12,7 +12,7 @@ export interface ExchangesLinks {
   website: string[];
   twitter?: string[];
 }
-export interface ExchangesData {
+export interface ExchangesList {
   id: string;
   name: string;
   active: boolean;

@@ -1,15 +1,20 @@
-import { ExchangesData } from 'api/interface/exchanges';
+import { ExchangesList } from 'interface/exchanges';
 import { getExchangesApi } from 'api/url';
 import { useEffect, useState } from 'react';
 import { v4 } from 'uuid';
 
 function Exchanges() {
   const [loading, setLoading] = useState(true);
-  const [data, setData] = useState<ExchangesData[]>([]);
+  const [data, setData] = useState<ExchangesList[]>([]);
 
   const getExchanges = async () => {
-    setData(await getExchangesApi());
-    setLoading(false);
+    try {
+      setData(await getExchangesApi());
+    } catch (e) {
+      console.log(e);
+    } finally {
+      setLoading(false);
+    }
   };
 
   useEffect(() => {
@@ -31,11 +36,19 @@ function Exchanges() {
           : data
               .filter(({ apiStatus, websiteStatus }) => apiStatus && websiteStatus)
               .filter(({ adjustedRank }) => adjustedRank && adjustedRank <= 5)
-              .sort((a, b) => (b.adjustedRank as number) - (a.adjustedRank as number))
-              .map(({ id, adjustedRank, name, description, links, apiStatus, websiteStatus }) => {
+              .sort((a, b) => {
+                if (a.name < b.name) {
+                  return -1;
+                }
+                if (a.name > b.name) {
+                  return 1;
+                }
+                return 0;
+              })
+              .map(({ id, name, description, links, apiStatus, websiteStatus }) => {
                 return (
                   <li key={id}>
-                    <span>{`${adjustedRank}. ${name}`}</span>
+                    <span>{`${name}`}</span>
                     <span>{`apiStatus: ${apiStatus} websiteStatus: ${websiteStatus}`}</span>
                     {description && <p>{sliceDescription(description)}</p>}
                     {links.website && (

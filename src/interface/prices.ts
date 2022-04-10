@@ -21,7 +21,7 @@ export interface pricesQuote {
 export interface pricesCurrency {
   usd: pricesQuote;
 }
-export interface PricesData {
+export interface PricesList {
   id: string;
   name: string;
   symbol: string;

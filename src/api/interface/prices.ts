@@ -1,36 +1,36 @@
 export interface pricesQuote {
   price: number;
-  volume_24h: number;
-  volume_24h_change_24h: number;
-  market_cap: number;
-  market_cap_change_24h: number;
-  percent_change_15m: number;
-  percent_change_30m: number;
-  percent_change_1h: number;
-  percent_change_6h: number;
-  percent_change_12h: number;
-  percent_change_24h: number;
-  percent_change_7d: number;
-  percent_change_30d: number;
-  percent_change_1y: number;
-  ath_price: number;
-  ath_date: string;
-  percent_from_price_ath: number;
+  volume24h: number;
+  volume24hChange24h: number;
+  marketCap: number;
+  marketCapChange24h: number;
+  percentChange15m: number;
+  percentChange30m: number;
+  percentChange1h: number;
+  percentChange6h: number;
+  percentChange12h: number;
+  percentChange24h: number;
+  percentChange7d: number;
+  percentChange30d: number;
+  percentChange1y: number;
+  athPrice: number;
+  athDate: string;
+  percentFromPriceAth: number;
 }
 
 export interface pricesCurrency {
-  [key: string]: pricesQuote;
+  usd: pricesQuote;
 }
 export interface PricesData {
   id: string;
   name: string;
   symbol: string;
   rank: number;
-  circulating_supply: number;
-  total_supply: number;
-  max_supply: number;
-  beta_value: number;
-  first_data_at: string;
-  last_updated: string;
+  circulatingSupply: number;
+  totalSupply: number;
+  maxSupply: number;
+  betaValue: number;
+  firstDataAt: string;
+  lastUpdated: string;
   quotes: pricesCurrency;
 }

@@ -16,15 +16,16 @@ function Prices() {
   }, []);
 
   return (
-    <div className='page-Prices'>
+    <div className='page-prices'>
       <ul>
         {loading
           ? 'Loading'
           : data
-              .filter((priceData) => priceData.rank < 30)
-              .map((priceData) => {
-                const { id, name, symbol } = priceData;
-                return <li key={id}>{`${name} / ${symbol}: ${'가격'}`}</li>;
+              .filter(({ rank }) => rank <= 30)
+              .map(({ id, name, rank, symbol, quotes }) => {
+                return (
+                  <li key={id}>{`${rank}. ${name} / ${symbol}: ${quotes.usd.price.toFixed(2)}`}</li>
+                );
               })}
       </ul>
     </div>

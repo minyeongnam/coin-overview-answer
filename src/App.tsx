@@ -1,3 +1,4 @@
+import Exchanges from 'components/Exchanges';
 import Prices from 'components/Prices';
 import { Route, Routes } from 'react-router-dom';
 import Header from './components/Header';
@@ -10,7 +11,7 @@ function App() {
       <div className='container'>
         <Routes>
           <Route path={ROOT.PRICES} element={<Prices />} />
-          <Route path={ROOT.EXCHANGES} />
+          <Route path={ROOT.EXCHANGES} element={<Exchanges />} />
           <Route path={ROOT.COINS} />
           <Route path={ROOT.NOTFOUND} />
           <Route path={ROOT.ROOT} element={<Prices />} />

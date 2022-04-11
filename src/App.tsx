@@ -1,6 +1,7 @@
 import Coins from 'components/Coins';
 import CoinView from 'components/Coins/CoinView';
 import Exchanges from 'components/Exchanges';
+import NotFound from 'components/NotFound';
 import Prices from 'components/Prices';
 import { Route, Routes } from 'react-router-dom';
 import Header from './components/Header';
@@ -16,7 +17,7 @@ function App() {
           <Route path={ROOT.EXCHANGES} element={<Exchanges />} />
           <Route path={ROOT.COINS} element={<Coins />} />
           <Route path={`${COINS.VIEW}`} element={<CoinView />} />
-          <Route path={ROOT.NOTFOUND} />
+          <Route path={ROOT.NOTFOUND} element={<NotFound />} />
           <Route path={ROOT.ROOT} element={<Prices />} />
         </Routes>
       </div>

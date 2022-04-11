@@ -4,6 +4,7 @@ import { CoinViewData, CoinMarketsList, CoinExchanges } from 'interface/coins';
 import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { v4 } from 'uuid';
+import classNames from 'classnames';
 
 function CoinView() {
   const { coinId } = useParams();
@@ -63,10 +64,18 @@ function CoinView() {
           </h1>
           <p className='view-description'>{description}</p>
           <div className='view-tab'>
-            <button type='button' className='btn-tab' onClick={handleGetMarkets}>
+            <button
+              type='button'
+              className={classNames('btn-tab', { on: tabState === 'markets' })}
+              onClick={handleGetMarkets}
+            >
               markets
             </button>
-            <button type='button' className='btn-tab' onClick={handleGetExchanges}>
+            <button
+              type='button'
+              className={classNames('btn-tab', { on: tabState === 'exchanges' })}
+              onClick={handleGetExchanges}
+            >
               exchanges
             </button>
           </div>

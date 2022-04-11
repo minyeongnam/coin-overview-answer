@@ -2,6 +2,7 @@
 
 유컴패니온 프론트엔드팀 실력 향상을 위해 제작하였습니다.  
 <br />
+<br />
 
 ## 과제 목표
 
@@ -11,6 +12,7 @@
 4. sass를 사용할 수 있다.
 5. css방법론 중 bem 방식을 이해 하고 사용할 수 있다.
    <br />
+   <br />
 
 ## 기술 스택
 
@@ -19,14 +21,12 @@
 - sass: scss + Bem
 - axios
   <br />
+  <br />
 
-## 미션
+## API
 
-style은 자율적으로 진행해주세요.
-<br />
-<br />
-
-### API
+https://api.coinpaprika.com/
+<br/>
 
 <details>
 <summary>prices</summary>
@@ -34,7 +34,25 @@ style은 자율적으로 진행해주세요.
 	
 ```
 https://api.coinpaprika.com/v1/tickers
+```
+
+</details>
+
+<details>
+<summary>exchanges</summary>
+<br/>
+	
+```
 https://api.coinpaprika.com/v1/exchanges
+```
+
+</details>
+
+<details>
+<summary>coins</summary>
+<br/>
+	
+```
 https://api.coinpaprika.com/v1/coins
 https://api.coinpaprika.com/v1/coins/{coin_id}
 https://api.coinpaprika.com/v1/coins/{coin_id}/markets
@@ -42,6 +60,13 @@ https://api.coinpaprika.com/v1/coins/{coin_id}/exchanges
 ```
 
 </details>
+<br />
+<br />
+
+## 미션
+
+style은 자율적으로 진행해주세요.
+<br />
 
 ### 공통
 
@@ -88,6 +113,7 @@ https://api.coinpaprika.com/v1/coins/{coin_id}/exchanges
 - [ ] marketUrl 링크 클릭 시 새창 이동
 - [ ] exchanges 버튼 클릭시 환전소 name, fiats 목록 구현
 - [ ] fiats length가 1 이상인 아이템으로 최대 10개 노출
+      <br />
       <br />
 
 ## 과제 이후

@@ -1,8 +1,8 @@
 import { ExchangesList } from 'interface/exchanges';
 import { PricesList } from 'interface/prices';
 import axios, { AxiosResponse } from 'axios';
-import camelCaseKeys from 'camelcase-keys';
 import { CoinsList, CoinViewData, CoinMarketsList, CoinExchanges } from 'interface/coins';
+import camelcaseKeys from 'camelcase-keys';
 
 export const api = axios.create({
   baseURL: 'https://api.coinpaprika.com/v1',
@@ -12,7 +12,7 @@ api.interceptors.response.use(
   (response) => {
     return {
       ...response,
-      data: camelCaseKeys(response.data, { deep: true }),
+      data: camelcaseKeys(response.data, { deep: true }),
     };
   },
   (error) => {

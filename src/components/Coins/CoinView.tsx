@@ -1,7 +1,9 @@
 import { getCoinViewApi, getCoinMarketsApi, getCoinExchangesApi } from 'api/url';
+import Loading from 'components/Loading';
 import { CoinViewData, CoinMarketsList, CoinExchanges } from 'interface/coins';
 import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
+import { v4 } from 'uuid';
 
 function CoinView() {
   const { coinId } = useParams();
@@ -49,46 +51,77 @@ function CoinView() {
   };
 
   const { name, symbol, description } = data || {};
-  console.log(tabState);
+
   return (
-    <div className='page-coins'>
+    <div className='page-coinview'>
       {loading ? (
-        <div>Loading</div>
+        <Loading />
       ) : (
         <>
-          <h1>
+          <h1 className='view-title'>
             {name}, {symbol}
           </h1>
-          <p>{description}</p>
-          <div className='coins-btnset'>
-            <button type='button' onClick={handleGetMarkets}>
+          <p className='view-description'>{description}</p>
+          <div className='view-tab'>
+            <button type='button' className='btn-tab' onClick={handleGetMarkets}>
               markets
             </button>
-            <button type='button' onClick={handleGetExchanges}>
+            <button type='button' className='btn-tab' onClick={handleGetExchanges}>
               exchanges
             </button>
           </div>
           {tabState === 'markets' &&
             (marketsLoading ? (
-              <div>Loading</div>
+              <Loading />
             ) : (
-              <ul>
+              <ul className='list-market'>
                 {marketsdata
-                  ?.filter((item, index) => index <= 30)
-                  .map(({ pair }) => {
-                    return <li>{pair}</li>;
+                  ?.filter(({ marketUrl }) => !!marketUrl)
+                  .filter((item, index) => index <= 10)
+                  .map(({ exchangeName, marketUrl }) => {
+                    return (
+                      <li className='list-item' key={v4()}>
+                        {exchangeName}
+                        {marketUrl && (
+                          <>
+                            {` : `}
+                            <a
+                              href={marketUrl}
+                              className='list-item-link'
+                              target='_blank'
+                              rel='noreferrer'
+                            >
+                              {marketUrl}
+                            </a>
+                          </>
+                        )}
+                      </li>
+                    );
                   })}
               </ul>
             ))}
           {tabState === 'exchanges' &&
             (exchangesLoading ? (
-              <div>Loading</div>
+              <Loading />
             ) : (
-              <ul>
+              <ul className='list-exchange'>
                 {exchangesdata
-                  ?.filter((item, index) => index <= 30)
-                  .map(({ id, name: exName }) => {
-                    return <li>{`${id} ${exName}`}</li>;
+                  ?.filter(({ fiats }) => fiats.length > 0)
+                  .filter((item, index) => index <= 10)
+                  .map(({ id, name: exName, fiats }) => {
+                    return (
+                      <li className='list-item' key={id}>
+                        <strong className='list-item-title'>{exName}: </strong>
+                        <span className='list-item-fiats'>
+                          {fiats.map(({ symbol: exchangesSymbol }, index) => {
+                            if (index === fiats.length) {
+                              return `${exchangesSymbol}`;
+                            }
+                            return `${exchangesSymbol}, `;
+                          })}
+                        </span>
+                      </li>
+                    );
                   })}
               </ul>
             ))}

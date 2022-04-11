@@ -1,1 +1,10 @@
-@use '_reset';
+@use 'base/reset';
+@use 'base/basic';
+
+@use 'layout/header';
+
+@use 'components/loading';
+
+@use 'pages/prices';
+@use 'pages/exchanges';
+@use 'pages/coins';

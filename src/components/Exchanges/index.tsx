@@ -2,6 +2,7 @@ import { ExchangesList } from 'interface/exchanges';
 import { getExchangesApi } from 'api/url';
 import { useEffect, useState } from 'react';
 import { v4 } from 'uuid';
+import Loading from 'components/Loading';
 
 function Exchanges() {
   const [loading, setLoading] = useState(true);
@@ -30,56 +31,64 @@ function Exchanges() {
 
   return (
     <div className='page-exchanges'>
-      <ul>
-        {loading
-          ? 'Loading'
-          : data
-              .filter(({ apiStatus, websiteStatus }) => apiStatus && websiteStatus)
-              .filter(({ adjustedRank }) => adjustedRank && adjustedRank <= 5)
-              .sort((a, b) => {
-                if (a.name < b.name) {
-                  return -1;
-                }
-                if (a.name > b.name) {
-                  return 1;
-                }
-                return 0;
-              })
-              .map(({ id, name, description, links, apiStatus, websiteStatus }) => {
-                return (
-                  <li key={id}>
-                    <span>{`${name}`}</span>
-                    <span>{`apiStatus: ${apiStatus} websiteStatus: ${websiteStatus}`}</span>
-                    {description && <p>{sliceDescription(description)}</p>}
-                    {links.website && (
-                      <div className='links'>
-                        <span>website</span>
-                        <ul>
-                          {links.website.map((item) => (
-                            <li key={v4()}>
-                              <a href={item} target='_blank' rel='noreferrer'>
-                                {item}
-                              </a>
-                            </li>
-                          ))}
-                        </ul>
-                      </div>
-                    )}
-                    {links.twitter && (
-                      <div className='links'>
-                        <span>twitter</span>
-                        <ul>
-                          {links.twitter?.map((item) => (
+      <ul className='list-exchange'>
+        {loading ? (
+          <Loading />
+        ) : (
+          data
+            .filter(({ apiStatus, websiteStatus }) => apiStatus && websiteStatus)
+            .filter(({ adjustedRank }) => adjustedRank && adjustedRank <= 5)
+            .sort((a, b) => {
+              if (a.name < b.name) {
+                return -1;
+              }
+              if (a.name > b.name) {
+                return 1;
+              }
+              return 0;
+            })
+            .map(({ id, name, description, links, apiStatus, websiteStatus }) => {
+              return (
+                <li className='list-item' key={id}>
+                  <strong className='list-item-title'>{name}</strong>
+                  <span className='list-item-status'>
+                    apiStatus: {`${apiStatus}`} / websiteStatus: {`${websiteStatus}`}
+                  </span>
+                  {description && (
+                    <p className='list-item-description'>{sliceDescription(description)}</p>
+                  )}
+                  {links.website && (
+                    <div className='list-item-links'>
+                      <strong>website</strong>
+                      <ul>
+                        {links.website.map((item) => (
+                          <li key={v4()}>
                             <a href={item} target='_blank' rel='noreferrer'>
                               {item}
                             </a>
-                          ))}
-                        </ul>
-                      </div>
-                    )}
-                  </li>
-                );
-              })}
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
+                  )}
+                  {links.twitter && (
+                    <div className='list-item-links'>
+                      <strong>twitter</strong>
+                      <ul>
+                        {links.twitter?.map((item) => (
+                          <li key={v4()}>
+                            <a href={item} target='_blank' rel='noreferrer'>
+                              {item}
+                            </a>
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
+                  )}
+                </li>
+              );
+            })
+        )}
       </ul>
     </div>
   );

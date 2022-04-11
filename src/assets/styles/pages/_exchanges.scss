@@ -1,0 +1,34 @@
+.page-exchanges {
+  .list-exchange .list-item {
+    margin-top: 50px;
+    &:first-child {
+      margin-top: 0;
+    }
+    &-title {
+      display: block;
+      font-size: 20px;
+      font-weight: bold;
+    }
+    &-status {
+      display: block;
+      margin-top: 15px;
+    }
+    &-description {
+      width: 800px;
+      margin-top: 15px;
+    }
+    &-links {
+      margin-top: 15px;
+      strong {
+        font-weight: bold;
+      }
+      ul li {
+        margin-top: 5px;
+        a {
+          color: cornflowerblue;
+          text-decoration: underline;
+        }
+      }
+    }
+  }
+}

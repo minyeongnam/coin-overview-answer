@@ -1,0 +1,26 @@
+header {
+  height: 60px;
+  padding: 0 10px;
+  line-height: 60px;
+  &:after {
+    content: '';
+    clear: both;
+    display: block;
+    overflow: hidden;
+  }
+  ul li {
+    float: left;
+    margin-left: 50px;
+    &:first-child {
+      margin-left: 0;
+    }
+    a {
+      color: #000;
+      padding: 0 10px;
+      &.active {
+        background: blueviolet;
+        color: #fff;
+      }
+    }
+  }
+}

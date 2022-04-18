@@ -122,7 +122,7 @@ function CoinView() {
                         <strong className='list-item-title'>{exName}: </strong>
                         <span className='list-item-fiats'>
                           {fiats.map(({ symbol: exchangesSymbol }, index) => {
-                            if (index === fiats.length) {
+                            if (index === fiats.length - 1) {
                               return `${exchangesSymbol}`;
                             }
                             return `${exchangesSymbol}, `;

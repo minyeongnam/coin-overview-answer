@@ -1,7 +1,6 @@
 import { ExchangesList } from 'interface/exchanges';
 import { getExchangesApi } from 'api/url';
 import { useEffect, useState } from 'react';
-import { v4 } from 'uuid';
 import Loading from 'components/Loading';
 
 function Exchanges() {
@@ -62,7 +61,7 @@ function Exchanges() {
                       <strong>website</strong>
                       <ul>
                         {links.website.map((item) => (
-                          <li key={v4()}>
+                          <li key={item}>
                             <a href={item} target='_blank' rel='noreferrer'>
                               {item}
                             </a>
@@ -76,7 +75,7 @@ function Exchanges() {
                       <strong>twitter</strong>
                       <ul>
                         {links.twitter?.map((item) => (
-                          <li key={v4()}>
+                          <li key={item}>
                             <a href={item} target='_blank' rel='noreferrer'>
                               {item}
                             </a>

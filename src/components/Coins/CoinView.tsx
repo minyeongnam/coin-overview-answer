@@ -3,7 +3,6 @@ import Loading from 'components/Loading';
 import { CoinViewData, CoinMarketsList, CoinExchanges } from 'interface/coins';
 import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
-import { v4 } from 'uuid';
 import classNames from 'classnames';
 
 function CoinView() {
@@ -89,7 +88,7 @@ function CoinView() {
                   .filter((item, index) => index <= 10)
                   .map(({ exchangeName, marketUrl }) => {
                     return (
-                      <li className='list-item' key={v4()}>
+                      <li className='list-item' key={`${marketUrl}`}>
                         {exchangeName}
                         {marketUrl && (
                           <>

@@ -85,7 +85,7 @@ function CoinView() {
               <ul className='list-market'>
                 {marketsdata
                   ?.filter(({ marketUrl }) => !!marketUrl)
-                  .filter((item, index) => index <= 10)
+                  .filter((item, index) => index < 10)
                   .map(({ exchangeName, marketUrl }) => {
                     return (
                       <li className='list-item' key={`${marketUrl}`}>
@@ -115,7 +115,7 @@ function CoinView() {
               <ul className='list-exchange'>
                 {exchangesdata
                   ?.filter(({ fiats }) => fiats.length > 0)
-                  .filter((item, index) => index <= 10)
+                  .filter((item, index) => index < 10)
                   .map(({ id, name: exName, fiats }) => {
                     return (
                       <li className='list-item' key={id}>
